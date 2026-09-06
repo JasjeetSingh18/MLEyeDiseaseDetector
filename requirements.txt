@@ -1,4 +1,6 @@
-torch
-torchvision
+fastapi
+uvicorn
 numpy
 pillow
+torch
+torchvision

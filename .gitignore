@@ -1,5 +1,6 @@
 data/
 .DS*
+sideNotes.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

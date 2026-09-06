@@ -5,15 +5,19 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Install Python deps
-COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip
 
-# Copy project
+# Install CPU-only PyTorch + torchvision
+RUN pip install --no-cache-dir \
+    --index-url https://download.pytorch.org/whl/cpu \
+    torch torchvision
+
+# Install the rest
+COPY requirementsCPU.txt .
+RUN pip install --no-cache-dir -r requirementsCPU.txt
+
 COPY . .
 
-# Run from backend folder so import "predict" works
 WORKDIR /app/backend
 
 EXPOSE 8000
